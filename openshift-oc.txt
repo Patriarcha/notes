@@ -28,6 +28,9 @@ Deployments monitor pods and automatically replace any that fail or terminate.
 They allow rolling updates (gradual replacement of old pods with new ones) to minimize downtime during application updates.
 Deployments are more suitable for managing application lifecycle, scaling, and rolling updates.
 
+Storage:
+It is normal that pods are destroyed, recreated, moved. SO volatile, unpersistent. But to prevail some data, we use persistent storage as persisten volume for state data.
+
 ---Docker
 Dockerfile consist all instruction how to build application. Within application can be base image, eniv variables, information on which port app will be exposed, entry point to point which process should be monitored to know if container is dead or not.
 Docker engine builds based on a dockerfile content an container. If any parts can be reused, they are. Like iage recives id, and when other build of the same application is required, then it is reused.
