@@ -1,0 +1,33 @@
+OpenShift
+
+oc show pods -n namespace
+oc show deployments -n namespace
+
+Services
+Ważne jest, aby zauważyć, że chociaż Pody w OpenShift mają swoje własne adresy IP i można do nich uzyskać dostęp bezpośrednio, Usługi zapewniają pojedynczy punkt dostępu do grupy Podów, poprawiając niezawodność i dostępność aplikacji działających na tych Podach.
+
+Service accounts - Konto usługi to konto OpenShift, które pozwala komponentowi bezpośrednio uzyskać dostęp do API. Istnieją one w każdym projekcie i zapewniają elastyczny sposób kontrolowania dostępu do API bez udostępniania poświadczeń zwykłego użytkownika.
+
+Operator - In the Kubernetes world, an operator is an application-specific controller that helps you package, deploy, and manage a Kubernetes application. Unlike the standard Kubernetes API and kubectl tooling, operators automate tasks specific to your application, such as deploying on demand, handling backups, managing upgrades, and more. They use custom resources to extend Kubernetes behavior without modifying its core code. Essentially, operators act as intelligent, automated operators who understand how your application should behave and take care of repetitive tasks for you.
+Pod - smallest unit of kubernetes cluster. Combines containers.
+
+Labels - Labels allow you to define affinity (preferred placement) or anti-affinity (avoidance) rules.
+	The OpenStack scheduler (Nova) can use labels to filter nodes during instance placement.
+	In Heat (OpenStack Orchestration), you can reference labels in your templates.
+		Labels help organize nodes for monitoring purposes.
+		You can set up monitoring tools (e.g., Prometheus, Grafana) to collect metrics based on labels (e.g., CPU usage on “Compute” nodes).
+		When defining backup or restore policies, consider using labels.
+		When deploying instances (VMs) or containers, you can specify label requirements. For example, you might want to deploy VMs only on nodes labeled as “Compute” or “High Performance.”
+		Use the labels to guide resource placement policies, ensuring that workloads are distributed optimally across your infrastructure.
+		
+Deployments:
+Deployments provide a higher-level abstraction for managing pods.
+A Deployment ensures a specified number of replicas (pods) are running at all times.
+When you create a Deployment, it automatically creates and manages the desired number of pods.
+Deployments monitor pods and automatically replace any that fail or terminate.
+They allow rolling updates (gradual replacement of old pods with new ones) to minimize downtime during application updates.
+Deployments are more suitable for managing application lifecycle, scaling, and rolling updates.
+
+---Docker
+Dockerfile consist all instruction how to build application. Within application can be base image, eniv variables, information on which port app will be exposed, entry point to point which process should be monitored to know if container is dead or not.
+Docker engine builds based on a dockerfile content an container. If any parts can be reused, they are. Like iage recives id, and when other build of the same application is required, then it is reused.

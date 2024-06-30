@@ -1,0 +1,29 @@
+HELM - it helps to manage and build complex container deployments. If project involves multiple Kubernetes applications that must be managed and deployed together. In that case, Helm can help by allowing you to package these applications into a single chart, making it easier to manage and deploy them together.
+HELM CHART - is a package that contains all the necessary resources to deploy an application to a Kubernetes cluster
+	config files contains application configurration that usyally is in YAML file.  Resources are deployed based on the values in this file.
+	releases are a running instance of a chart. When we do hel, instal it pulls the config and a chart files and deploys all the Kubernetes resources
+Architecture
+	client - just a helm client to use commands
+	library - it contains the actual code to perform the operations. Combination of config and chart files to create any release is handled by the helm
+Helm architecture improved significantly between version 2 and 3. Version 2 used Tiller server to speak between helm client and kubernetes API. In version 3 is no more.
+valaues.yaml is a file to specify replicas etc.
+
+Think of a Helm chart as a recipe for deploying your application. The chart includes a list of ingredients (Kubernetes resources), instructions on how to prepare the ingredients (configuration), and a serving suggestion (the release name).
+
+mychart/
+  Chart.yaml -- code
+  values.yaml -- configuration
+  templates/
+    deployment.yaml -- Kubernetes resources
+    service.yaml
+
+Helm Chart has the actual information what needs to be deployed-> values.yaml contains actual configuration  for each resource -> values .yaml to resolve variable references->Helm->Kubernetes cluster.
+Helm repository is where you can upload Helm charts.
+
+Artifact hub is a global helm repository. Private repo canbe created also. Artifiact hub to helm is what dockerhub to docker.
+Helm rollback - to rollback to last version
+
+helm status: Shows the status of a release.
+helm list: Lists all the releases on the cluster.
+helm rollback: Rolls back a release to a previous version.
+helm delete: Deletes a release.
