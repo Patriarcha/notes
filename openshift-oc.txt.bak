@@ -28,8 +28,6 @@ Deployments monitor pods and automatically replace any that fail or terminate.
 They allow rolling updates (gradual replacement of old pods with new ones) to minimize downtime during application updates.
 Deployments are more suitable for managing application lifecycle, scaling, and rolling updates.
 
---Repository/Container registry based on Red Hat QUAY
-
 --Service Mech based on Istio is used through the utilization of ingress gateways (specific ingress controlers). Is also used for egress gateways.
 
 --EventStreams Services is a sepcific use case of communication over network connections. These communications require authentication, using Salted Challenge Response Authentication Mechanism (SCRAM) and all messages are encrypted using TLS.
