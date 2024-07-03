@@ -1,0 +1,41 @@
+#assign_app_label_fat.yaml
+apiVersion: v1
+kind: List
+items:
+  - apiVersion: v1
+    kind: Node
+    metadata:
+      name: sisaup-xwt9g-worker-0-5jwxb
+      labels:
+        fat/app: istio
+  - apiVersion: v1
+    kind: Node
+    metadata:
+      name: sisaup-xwt9g-worker-0-bsjjj
+      labels:
+        fat/app: istio
+  - apiVersion: v1
+    kind: Node
+    metadata:
+      name: sisaup-xwt9g-worker-0-dkww9
+      labels:
+        fat/app: istio
+  - apiVersion: v1
+    kind: Node
+    metadata:
+      name: sisaup-xwt9g-worker-0-ds4r7
+      labels:
+        fat/app: eventstream
+  - apiVersion: v1
+    kind: Node
+    metadata:
+      name: sisaup-xwt9g-worker-0-fjpqq
+      labels:
+        fat/app: eventstream
+  - apiVersion: v1
+    kind: Node
+    metadata:
+      name: sisaup-xwt9g-worker-0-lg52b
+      labels:
+        fat/app: ilgw
+  

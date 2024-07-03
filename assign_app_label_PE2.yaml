@@ -1,4 +1,4 @@
-#assign_app_label_PE2.yaml
+#assign_app_label_pe2.yaml
 apiVersion: v1
 kind: List
 items:
@@ -7,52 +7,52 @@ items:
     metadata:
       name: sis2pe21ocp01-ien01
       labels:
-        PE2/app: istio
+        pe2/app: istio
   - apiVersion: v1
     kind: Node
     metadata:
       name: sis2pe21ocp01-ien02
       labels:
-        PE2/app: istio
+        pe2/app: istio
   - apiVersion: v1
     kind: Node
     metadata:
       name: sis2pe21ocp01-ien03
       labels:
-        PE2/app: istio
+        pe2/app: istio
   - apiVersion: v1
     kind: Node
     metadata:
       name: sis2pe21ocp01-evs01
       labels:
-        PE2/app: eventstream
+        pe2/app: eventstream
   - apiVersion: v1
     kind: Node
     metadata:
       name: sis2pe21ocp01-evs02
       labels:
-        PE2/app: eventstream
+        pe2/app: eventstream
   - apiVersion: v1
     kind: Node
     metadata:
       name: sis2pe21ocp01-evs03
       labels:
-        PE2/app: eventstream
+        pe2/app: eventstream
   - apiVersion: v1
     kind: Node
     metadata:
       name: sis2pe21ocp01-wrk01
       labels:
-        PE2/app: ilgw
+        pe2/app: ilgw
   - apiVersion: v1
     kind: Node
     metadata:
       name: sis2pe21ocp01-wrk02
       labels:
-        PE2/app: ilgw
+        pe2/app: ilgw
   - apiVersion: v1
     kind: Node
     metadata:
       name: sis2pe21ocp01-wrk03
       labels:
-        PE2/app: ilgw
+        pe2/app: ilgw
