@@ -393,3 +393,139 @@ kubectl describe pod <pod-name>
 - Zasady zdefiniowane przez Kubernetes dla komunikacji pod-to-pod: brak NAT, wszystkie pody muszą się komunikować ze sobą na wszystkich node'ach, wszystkie node'y muszą komunikować się ze wszystkimi podami w klastrze
 
 > Przydatny link ilustrujący sieciowanie: [Illustrated Guide to Kubernetes Networking](https://speakerdeck.com/thockin/illustrated-guide-to-kubernetes-networking)
+
+### ETCD backup
+
+```bash
+# Sprawdzenie ustawień dla etcd, lokalizacji plików danych bazy
+sudo grep data-dit /etc/kubernetes/manifests/etcd.yaml
+--data-dir=/var/lib/etcd
+```
+
+```bash
+# Wywołanie help dla etcdctl z poziomu poda etcd
+kubectl -n kube-system exec etcd<TAB> -- etcdctl -h
+```
+
+```bash
+# Sprawdzenie stanu bazy etcd
+kubectl -n kube-system exec etcd-cp -- \
+  etcdctl \
+  --cacert=/etc/kubernetes/pki/etcd/ca.crt \
+  --cert=/etc/kubernetes/pki/etcd/server.crt \
+  --key=/etc/kubernetes/pki/etcd/server.key \
+  --endpoints=https://127.0.0.1:2379 \
+  endpoint health
+  ```
+
+ ```bash
+ # Sprawdzenie ilości baz; -w table dla formatu tabeli
+ kubectl -n kube-system exec etcd-cp -- \
+  etcdctl \
+  --cacert=/etc/kubernetes/pki/etcd/ca.crt \
+  --cert=/etc/kubernetes/pki/etcd/server.crt \
+  --key=/etc/kubernetes/pki/etcd/server.key \
+  --endpoints=https://127.0.0.1:2379 \
+  member list -w table
+  ```
+```bash
+# Wykonanie backupu metodą snapshot
+kubectl -n kube-system exec etcd-cp -- \
+  etcdctl \
+  --cacert=/etc/kubernetes/pki/etcd/ca.crt \
+  --cert=/etc/kubernetes/pki/etcd/server.crt \
+  --key=/etc/kubernetes/pki/etcd/server.key \
+  --endpoints=https://127.0.0.1:2379 \
+  snapshot save /var/lib/etcd/snapshot.db
+  ```
+
+### Pliki które należy backupować
+- /var/lib/etcd/snapshot.db
+- /root/kubeadm-config.yaml
+- /etc/kubernetes/pki/etcd
+
+# Upgrade
+### Wouerw należy wykonać unhold dla pakietu kubeadm
+```bash
+sudo apt-mark unhold kubeadm
+```
+### Póśniej zaktualizować repozutorium aby wskazywało na nową wersję
+```bash
+sudo sed -i 's/34/35/g' /etc/apt/sources.list.d/kubernetes.list
+sudo apt update
+```
+### Sprawdzamy dostępne wersje
+```bash
+sudo apt-cache madison kubeadm
+```
+
+### Po aktualizacji pakietu kubeadm należy przenieść działające pody na inne nody - operacja drain
+```bash
+kubectl drain cp --ignore-daemonsets
+```
+#### Upgrade plan
+```bash 
+sudo kubeadm upgrade plan
+```
+```bash
+sudo kubeadm upgrade apply v1.35.2
+```
+#### Po upgrade klastra kubelet and kubectl muszą zostać zaktualizowane
+```bash
+sudo apt-mark unhold kubelet kubectl
+sudo apt install -y kubelet=1.35.2-1.1 kubectl=1.35.2-1.1 
+sudo apt-mark hold kubelet kubectl
+```
+#### Kolejno należy zrestartować daemony
+```bash
+sudo systemctl daemon-reload
+sudo systemctl restart kubelet
+```
+#### After upgrade to make cp available for the scheduler again we must uncordon the node
+```bash
+sudo kubectl uncordon cp
+```
+# Limits
+In resources section in podspec needs to be added limit and requests
+```yaml
+       resources: 
+          limits:
+            cpu: "1"
+            memory: "4Gi"
+          requests:
+            cpu: "1"
+            memory: "2500Mi"
+```
+
+### Exising pod can be replaced with a new configuration by
+```bash
+kubectl replace -f hog.yaml
+```
+
+### To check pod logs use logs command
+```bash
+kubectl logs <pod_name>
+```
+
+### To create namespace
+```bash
+kubectl create ns <name>
+# To limit resource scope namespace limit range object can be used
+```yaml
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: low-resource-range
+spec:
+  limits:
+  - default:
+      cpu: 1
+      memory: 500Mi
+    defaultRequest:
+      cpu: 0.5
+      memory: 100Mi
+    type: Container
+```
+# To see limitranges
+kubectl get limitrange --all-namespaces
+```
