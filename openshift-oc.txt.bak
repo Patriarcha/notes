@@ -3,11 +3,6 @@ OpenShift
 oc show pods -n namespace
 oc show deployments -n namespace
 
-Project = Kubernetes namespace
-wildfly to pochodna jboss
-
-Image Builder builds an artifacts and creates service, and then it builds image. 
-
 Services
 Ważne jest, aby zauważyć, że chociaż Pody w OpenShift mają swoje własne adresy IP i można do nich uzyskać dostęp bezpośrednio, Usługi zapewniają pojedynczy punkt dostępu do grupy Podów, poprawiając niezawodność i dostępność aplikacji działających na tych Podach.
 
@@ -33,22 +28,10 @@ Deployments monitor pods and automatically replace any that fail or terminate.
 They allow rolling updates (gradual replacement of old pods with new ones) to minimize downtime during application updates.
 Deployments are more suitable for managing application lifecycle, scaling, and rolling updates.
 
-Storage:
-It is normal that pods are destroyed, recreated, moved. SO volatile, unpersistent. But to prevail some data, we use persistent storage as persisten volume for state data.
-
-<<<<<<< HEAD
-Source to Image - we don't have to use Dockerfile, we can use code and use docker builder and it will be compiled. So no images requred. 
-Openshift has it own Image Registry. It can be public as DockerHub. So when openshift will get access to the repository, it will be able to create itself a pod and build an image. Developers doesn't have to know Contenerisation att all.
-=======
---Repository/Container registry based on Red Hat QUAY
-
 --Service Mech based on Istio is used through the utilization of ingress gateways (specific ingress controlers). Is also used for egress gateways.
 
 --EventStreams Services is a sepcific use case of communication over network connections. These communications require authentication, using Salted Challenge Response Authentication Mechanism (SCRAM) and all messages are encrypted using TLS.
->>>>>>> 42734fc9cce2b08abf6136d041ba723202a001ee
 
 ---Docker
 Dockerfile consist all instruction how to build application. Within application can be base image, eniv variables, information on which port app will be exposed, entry point to point which process should be monitored to know if container is dead or not.
 Docker engine builds based on a dockerfile content an container. If any parts can be reused, they are. Like iage recives id, and when other build of the same application is required, then it is reused.
-
---Kubernetes

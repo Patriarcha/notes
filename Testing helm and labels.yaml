@@ -1,0 +1,42 @@
+#Testing helm and labels
+
+#helm repo add lerndevops https://lerndevops.github.io/helm-charts/
+#helm repo update
+
+#helm install lerndevops/testapp --set nodeSelector=fat/app=ilgw
+
+#helm install --set nodeSelector."fat/app"=ilgw testapp lerndevops/testapp -n sis-fat 
+helm install testapp lerndevops/testapp -n sis-fat -f env/env_FAT.yaml 
+
+helm upgrade --install
+helm upgrade --install testapp lerndevops/testapp --values env/env_FAT.yaml -n sis-fat
+
+### This worked, mostly because the helm chart accept nodeSelector change, and by --set, not a file
+helm upgrade --install hello cloudecho/hello -n sis-fat --values env/env_FAT.yaml --set nodeSelector.fat/app=ilgw
+
+### This worked too with a file
+helm install hello cloudecho/hello -n sis-fat --values env/env_FAT.yaml
+helm install hello cloudecho/hello -n sis-fat -f env/env_FAT.yaml    
+env/env_FAT.yaml
+
+!!CAUTION!! deployent must support passing nodeSelector phrase!
+
+nodeSelector:
+  fat/app: ilgw
+
+
+oc get deployment -n sis-fat                                                                                            pwsh   100  22:01:30 NAME                               READY   UP-TO-DATE   AVAILABLE   AGE
+alarm-log-connector                1/1     1            1           12d
+alertdata-notification-processor   1/1     1            1           12d
+codetable-cache-service            1/1     1            1           12d
+configuration-cache-handler        1/1     1            1           12d
+esp-notification-dispatcher        1/1     1            1           12d
+esp-notification-packer            1/1     1            1           12d
+esp-notification-unpacker          1/1     1            1           12d
+etias-notification-dispatcher      1/1     1            1           12d
+gateway-cache-service              1/1     1            1           12d
+java-app                           0/3     3            0           4m50s    <--------- Here it is
+message-log-connector              1/1     1            1           12d
+query-proxy                        1/1     1            1           12d
+sirene-notification-processor      1/1     1            1           12d
+textual-query-processor            1/1     1            1           12d

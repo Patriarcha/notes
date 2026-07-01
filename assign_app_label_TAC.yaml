@@ -1,0 +1,159 @@
+#assign_app_label_TAC.yaml
+apiVersion: v1
+kind: List
+items:
+  - apiVersion: v1
+    kind: Node
+    metadata:
+      name: sis2tac1ocp01-ien01
+      labels:
+        pgx/app: istio
+        ctx/app: istio
+  - apiVersion: v1
+    kind: Node
+    metadata:
+      name: sis2tac1ocp01-ien02
+      labels:
+        pgx/app: istio
+        ctx/app: istio
+  - apiVersion: v1
+    kind: Node
+    metadata:
+      name: sis2tac1ocp01-ien03
+      labels:
+        pgx/app: istio
+        ctx/app: istio
+  - apiVersion: v1
+    kind: Node
+    metadata:
+      name: sis2tac1ocp01-evs01
+      labels:
+        pgx/app: eventstream
+        ctx/app: eventstream
+  - apiVersion: v1
+    kind: Node
+    metadata:
+      name: sis2tac1ocp01-evs02
+      labels:
+        pgx/app: eventstream
+        ctx/app: eventstream
+  - apiVersion: v1
+    kind: Node
+    metadata:
+      name: sis2tac1ocp01-evs03
+      labels:
+        pgx/app: eventstream
+        ctx/app: eventstream
+  - apiVersion: v1
+    kind: Node
+    metadata:
+      name: sis2tac1ocp01-wrk01
+      labels:
+        TAC/app: ilgw
+        pgx/app: ilgw
+        ctx/app: ilgw
+  - apiVersion: v1
+    kind: Node
+    metadata:
+      name: sis2tac1ocp01-wrk02
+      labels:
+        TAC/app: ilgw
+        pgx/app: ilgw
+        ctx/app: ilgw
+  - apiVersion: v1
+    kind: Node
+    metadata:
+      name: sis2tac1ocp01-wrk03
+      labels:
+        TAC/app: ilgw
+        pgx/app: ilgw
+        ctx/app: ilgw
+  - apiVersion: v1
+    kind: Node
+    metadata:
+      name: sis2tac1ocp01-wrk04
+      labels:
+        TAC/app: ilgw
+        pgx/app: ilgw
+        ctx/app: ilgw
+  - apiVersion: v1
+    kind: Node
+    metadata:
+      name: sis2tac1ocp01-wrk05
+      labels:
+        TAC/app: ilgw
+        pgx/app: ilgw
+        ctx/app: ilgw
+  - apiVersion: v1
+    kind: Node
+    metadata:
+      name: sis2tac1ocp01-wrk06
+      labels:
+        TAC/app: ilgw
+        pgx/app: ilgw
+        ctx/app: ilgw
+  - apiVersion: v1
+    kind: Node
+    metadata:
+      name: sis2tac1ocp01-wrk07
+      labels:
+        TAC/app: ilgw
+        pgx/app: ilgw
+        ctx/app: ilgw
+  - apiVersion: v1
+    kind: Node
+    metadata:
+      name: sis2tac1ocp01-wrk08
+      labels:
+        TAC/app: ilgw
+        pgx/app: ilgw
+        ctx/app: ilgw
+  - apiVersion: v1
+    kind: Node
+    metadata:
+      name: sis2tac1ocp01-wrk09
+      labels:
+        TAC/app: ilgw
+        pgx/app: ilgw
+        ctx/app: ilgw
+  - apiVersion: v1
+    kind: Node
+    metadata:
+      name: sis2tac1ocp01-wrk10
+      labels:
+        TAC/app: ilgw
+        pgx/app: ilgw
+        ctx/app: ilgw
+  - apiVersion: v1
+    kind: Node
+    metadata:
+      name: sis2tac1ocp01-wrk11
+      labels:
+        TAC/app: ilgw
+        pgx/app: ilgw
+        ctx/app: ilgw
+  - apiVersion: v1
+    kind: Node
+    metadata:
+      name: sis2tac1ocp01-wrk12
+      labels:
+        TAC/app: ilgw
+        pgx/app: ilgw
+        ctx/app: ilgw
+  - apiVersion: v1
+    kind: Node
+    metadata:
+      name: sis2tac1ocp01-wrk13
+      labels:
+        TAC/app: ilgw
+        pgx/app: ilgw
+        ctx/app: ilgw
+  - apiVersion: v1
+    kind: Node
+    metadata:
+      name: sis2tac1ocp01-wrk14
+      labels:
+        TAC/app: ilgw
+        pgx/app: ilgw
+        ctx/app: ilgw
+  
