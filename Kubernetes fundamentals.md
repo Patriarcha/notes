@@ -529,3 +529,47 @@ spec:
 # To see limitranges
 kubectl get limitrange --all-namespaces
 ```
+
+## API
+
+- curl can be used to explore the avialable API resources
+- api groups may have multiple versions e.g. v1, v1beta1
+- api groups follows domain-style naming convention e.g. .k8s.io
+
+> Regulary review the Kubernetes documunetation for updates on API changes, especially before upgrading your cluster, to ensure scipts and automation remain compatible
+
+` $ curl --cert userbob.pem --key userBob-key.pem --cacert /path/to/ca.pem https://k8sServer:6443/api/v1/pods ` equals kubectl get pods
+
+` kubectl auth can-i` lets you to test specific operations. e.g. kubectl auth can-i create deployments
+` kubectl auth can-i create deployments --as bob ` tests permissions for different user
+
+- Specialized API resources to review access permissions **SelfSubjectAccessReview** for user acces or delagating tasks e.g. creating resources; **LocalSubjectAccessReview** evaluates pemissions for a specific user or group within a single namespace; **SelfSubjectRulesReview** lists all allowed actions for a user within a specified namespace, so self check.
+- resourceVersion is resposnible for locking system. resourceVersion is maintained by **etcd**
+
+- kubectl unded the hood translate commands into api calls in JSON payload. To see a complete transformation **verbose mode** can be enabled with **--v** flag with numeric value, 10 is maximum detail.
+
+## Annotations
+Different than labels, annotations are used not to identify a resource, rather they are usued to pass human readable key:value informations e.g. description
+To set annotation `kubectl annotate --overwrite pod webpod description="Old Production Pods" -n prod` is used.
+To unset annotation - minus sign is used `kubectl annotate pod -n prod webpod description-`
+
+> Always use verion specyfing image version (e.g. nginx:1.28) to avoid unexpected updates from the latest tag, which **is not** recommended for production.
+
+## kubectl
+- config is typically located at ~/.kube/config and is brought up with every call to API. `kubectl config view` can reveal config location.
+- config stores token or username/password which are mutually exclusice
+- config stores information to which cluster, using which credetnials kubectl should connect. It allows switching between clusters and users.
+- `kubectl api-resources` list all avaialble resources and their API groups, with their accepted abbreviations 
+- Use `kubectl logs firstpod` to retreive logs from pod
+
+# Namespaces
+- Isolates groups of resources, such as projects, teams or environments e.g. dev, staging, prod
+- Use quotas to control how many resources each group can consume
+- Enforce access control since RBAC rules can be scoped at the namespace level
+- At cluster creation 4 namespaces are automatically available: **default**,**kube-node-lease** which stores lease objects for worker nodes used to monitor node health. **kube-public** annonymously available general cluster information namespace. **kube-system** contains critical system components such as DNS, networking and other infrastructure Pods managed by Kubernetes.
+- To list namespaces use `kubectl get ns`; to create use `kubectl create ns something`; to inspect details use `kubectl describe ns something`; `kubectl delete ns/something` to delete namespace.
+- Accessing resources is available in two notaions **ns/something** and **ns something**
+
+Swagger is used for reviewing available APIs
+
+ 
